@@ -57,8 +57,12 @@ app.route("/:dateString").get(function(req, res){
       
   } else {
     var dateMoment = moment(dateInput);
-    naturalDateString = dateMoment.format("MMMM D, YYYY");
-    unixTimeStamp = dateMoment.unix();
+    
+    if(/\d/.test(dateInput)){
+      naturalDateString = dateMoment.format("MMMM D, YYYY");
+      unixTimeStamp = dateMoment.unix();
+    }
+    
   }
   
   res.json({"unix" : unixTimeStamp, "natural": naturalDateString});
